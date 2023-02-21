@@ -4,15 +4,20 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main1 {
     public static void main(String[] args) {
-        Car car1 = new Car();
-        car1.go();
-
         ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("applicationContext.xml");
-        Car car = context.getBean("customCar", Car.class);
-        car1.go();
-        Car car2 = context.getBean("customCar", Car.class );
-        System.out.println(car==car2);
+                new ClassPathXmlApplicationContext("applicationContext4.xml");
+
+        Transport moto1  = context.getBean("moto", Moto.class);
+        Transport moto2 = context.getBean("moto", Moto.class);
+        System.out.println(moto1 == moto2);
+        System.out.println(moto1);
+        System.out.println(moto2);
+
+        moto1.go();
+
+        Person person = context.getBean("person", Person.class);
+        person.sitInCar();
+
         context.close();
     }
 }
