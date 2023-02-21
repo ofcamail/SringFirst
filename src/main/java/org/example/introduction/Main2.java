@@ -1,13 +1,27 @@
 package org.example.introduction;
-
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-//В Person закомментирован конструктор, поэтому тут ничего не работает.
+
 public class Main2 {
+
     public static void main(String[] args) {
+
         ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("applicationContext2.xml");
-        Person person1 = context.getBean("customPerson", Person.class);
-        person1.sitInCar();
+                new ClassPathXmlApplicationContext("applicationContext4.xml");
+
+        Transport car1 = context.getBean("car", Car.class);
+        Transport car2 = context.getBean("car", Car.class);
+        System.out.println(car1 == car2);
+        System.out.println(car1);
+        System.out.println(car2);
+
         context.close();
+
+        AnnotationConfigApplicationContext context1 = new AnnotationConfigApplicationContext(Config.class);
+        Person person = context1.getBean("person", Person.class);
+        person.sitInCar();
+
+        context1.close();
+
     }
 }
